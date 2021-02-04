@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  FlatList,
-  ToastAndroid,
-  SafeAreaView,
-  StatusBar,
-} from "react-native";
-import { Text, ListItem, Header, Button } from "react-native-elements";
+import { FlatList, ToastAndroid, SafeAreaView } from "react-native";
+import { ListItem, Header } from "react-native-elements";
 import api from "../../services/api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LogoutButton from "../../components/LogoutButton";
