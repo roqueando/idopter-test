@@ -18,11 +18,14 @@ export default function Login({ navigation }) {
         email,
         password,
       });
+
       await AsyncStorage.setItem("@fifatoken", data.Token);
       navigation.navigate("Winners");
+
       setLoading(false);
     } catch (error) {
       setLoading(false);
+
       return ToastAndroid.show(
         "Opa jogador, seu email e/ou senha estao errados.",
         ToastAndroid.SHORT
