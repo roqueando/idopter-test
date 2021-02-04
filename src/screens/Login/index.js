@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, ToastAndroid } from "react-native";
-import { Header, Input, Text, Image, Button } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome";
+import { View, ToastAndroid } from "react-native";
+import { Header, Input, Text, Button } from "react-native-elements";
 import { LoginView } from "./styled";
 import api from "../../services/api";
+import { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login({ navigation }) {
@@ -20,6 +20,7 @@ export default function Login({ navigation }) {
       });
       await AsyncStorage.setItem("@fifatoken", data.Token);
       navigation.navigate("Winners");
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       return ToastAndroid.show(
@@ -28,6 +29,16 @@ export default function Login({ navigation }) {
       );
     }
   };
+
+  const checkIfAuthenticated = async () => {
+    const token = await AsyncStorage.getItem("@fifatoken");
+    if (token) {
+      return navigation.navigate("Winners");
+    }
+  };
+  useEffect(() => {
+    checkIfAuthenticated();
+  }, []);
 
   return (
     <View>
